@@ -43,7 +43,7 @@ class ApiService {
       List<Movie> movies = (data['results'] as List)
           .map((json) => Movie.fromJson(json))
           .toList();
-      return movies.take(6).toList();
+      return movies.take(18).toList();
     } else {
       throw Exception('Failed to load latest movies');
     }

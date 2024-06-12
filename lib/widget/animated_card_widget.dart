@@ -4,10 +4,12 @@ import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 class AnimatedCardWidget extends StatefulWidget {
   final Image image;
   final VoidCallback onTap;
+  final HitTestBehavior hitTestBehavior;
 
   const AnimatedCardWidget({
     required this.image,
     required this.onTap,
+    this.hitTestBehavior = HitTestBehavior.translucent,
     super.key,
   });
 
@@ -73,23 +75,13 @@ class _AnimatedCardWidgetState extends State<AnimatedCardWidget>
   }
 
   Widget buildCard({required VoidCallback onClicked}) => GestureDetector(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-          ),
+        behavior: widget.hitTestBehavior,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18.0),
           child: widget.image,
         ),
         onTap: () {
-          //handleAnimation();
           widget.onTap();
-        },
-        onHorizontalDragEnd: (details) {
-          // Додайте тут логіку свайпа
-          if (details.primaryVelocity! > 0) {
-            print('Swiped right');
-          } else if (details.primaryVelocity! < 0) {
-            print('Swiped left');
-          }
         },
       );
 }
